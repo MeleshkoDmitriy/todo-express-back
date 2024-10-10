@@ -151,6 +151,7 @@ const deleteTask = async (req, res) => {
 
 const toggleTask = async (req, res) => {
   const { paramsId } = req.params;
+  const completedUpdate = req.body;
 
   const foundTask = todolist.find((t) => t.id === +paramsId);
 
@@ -160,7 +161,13 @@ const toggleTask = async (req, res) => {
       .json({ message: "Задача не найдена" });
   }
 
-  const updatedTask = { ...foundTask, completed: !foundTask.completed };
+  if (!req.body) {
+    return res
+     .status(HTTP_STATUSES.BAD_REQUEST_400)
+     .json({ message: "Недопустимое значение поля completed" });
+  }
+
+  const updatedTask = { ...foundTask, completed: completedUpdate };
   const index = todolist.indexOf(foundTask);
   todolist[index] = updatedTask;
   res.status(HTTP_STATUSES.OK_200).json(updatedTask);
