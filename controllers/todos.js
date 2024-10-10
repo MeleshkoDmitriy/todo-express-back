@@ -149,10 +149,28 @@ const deleteTask = async (req, res) => {
     .json({ message: "Задача успешно удалена", todolist: todolist });
 };
 
+const toggleTask = async (req, res) => {
+  const { paramsId } = req.params;
+
+  const foundTask = todolist.find((t) => t.id === +paramsId);
+
+  if (!foundTask) {
+    return res
+      .status(HTTP_STATUSES.NOT_FOUND_404)
+      .json({ message: "Задача не найдена" });
+  }
+
+  const updatedTask = { ...foundTask, completed: !foundTask.completed };
+  const index = todolist.indexOf(foundTask);
+  todolist[index] = updatedTask;
+  res.status(HTTP_STATUSES.OK_200).json(updatedTask);
+};
+
 module.exports = {
   getTasks,
   getTaskById,
   addTask,
   updateTask,
   deleteTask,
+  toggleTask
 };
