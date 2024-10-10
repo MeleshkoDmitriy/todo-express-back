@@ -171,6 +171,11 @@ const toggleTask = async (req, res) => {
   const index = todolist.indexOf(foundTask);
   todolist[index] = updatedTask;
   res.status(HTTP_STATUSES.OK_200).json(updatedTask);
+
+  console.log(completedUpdate)
+  console.log(req.body)
+  console.log(foundTask)
+  console.log(updatedTask)
 };
 
 module.exports = {
