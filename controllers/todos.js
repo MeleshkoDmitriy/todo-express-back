@@ -107,7 +107,7 @@ const addTask = async (req, res) => {
 };
 
 const updateTask = async (req, res) => {
-  const { paramsId } = req.params;
+  const { id } = req.params;
 
   const newTask = req.body;
   const { title, category } = newTask;
@@ -118,7 +118,7 @@ const updateTask = async (req, res) => {
       .json({ message: "Все поля обязательны для заполнения" });
   }
 
-  const foundTask = todolist.find((t) => t.id === +paramsId);
+  const foundTask = todolist.find((t) => t.id === +id);
 
   if (!foundTask) {
     return res
@@ -150,9 +150,9 @@ const deleteTask = async (req, res) => {
 };
 
 const toggleTask = async (req, res) => {
-  const { paramsId } = req.params;
+  const { id } = req.params;
 
-  const foundTask = todolist.find((t) => t.id === +paramsId);
+  const foundTask = todolist.find((t) => t.id === +id);
 
   if (!foundTask) {
     return res
