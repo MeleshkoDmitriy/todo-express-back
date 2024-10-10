@@ -126,7 +126,7 @@ const updateTask = async (req, res) => {
       .json({ message: "Задача не найдена" });
   }
 
-  const updatedTask = { ...foundTask, ...newTask };
+  const updatedTask = { ...foundTask, ...req.body };
   const index = todolist.indexOf(foundTask);
   todolist[index] = updatedTask;
   res.status(HTTP_STATUSES.OK_200).json(updatedTask);
