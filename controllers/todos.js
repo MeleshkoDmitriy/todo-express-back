@@ -167,7 +167,7 @@ const toggleTask = async (req, res) => {
      .json({ message: "Недопустимое значение поля completed" });
   }
 
-  const updatedTask = { ...foundTask, completed: completedUpdate };
+  const updatedTask = { ...foundTask, completed: completedUpdate.completed };
   const index = todolist.indexOf(foundTask);
   todolist[index] = updatedTask;
   res.status(HTTP_STATUSES.OK_200).json(updatedTask);
