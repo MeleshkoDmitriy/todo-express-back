@@ -1,10 +1,7 @@
 const HTTP_STATUSES = require("../constants");
+const todolist = require("../_db");
 
-let todolist = [
-  { id: 1, category: "hobby", title: "Task 1", completed: false },
-  { id: 2, category: "job", title: "Task 2", completed: false },
-  { id: 3, category: "pet", title: "Task 3", completed: true },
-];
+
 
 const getTasks = (req, res) => {
   let foundTasks = [...todolist];
